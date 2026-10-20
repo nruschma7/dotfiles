@@ -32,6 +32,7 @@ in
 
     extraConfig = lib.mkMerge [
       ''
+        set-environment -g PATH "$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:$PATH"
         # If fresh install: `tmux source ~/.tmux.conf` + `prefix + I
         # https://github.com/tmux-plugins/tpm?tab=readme-ov-file#installing-plugins
         set-option -w -g aggressive-resize on

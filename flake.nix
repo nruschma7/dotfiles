@@ -11,7 +11,6 @@
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      # Baut eine Home-Manager-Konfiguration: gemeinsame home.nix + hostspezifische Module
       mkHome = { system, username, homeDirectory, modules }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
