@@ -48,8 +48,6 @@ in
 
         # open new windows in same dir
         # tmux set-option default-path "$PWD"
-        bind '"' split-window -c "#{pane_current_path}"
-        bind % split-window -h -c "#{pane_current_path}"
         bind c new-window -c "#{pane_current_path}"
 
         # easy session
@@ -57,16 +55,16 @@ in
         # TODO: create prompt to select and kill session
         bind-key S 'display-popup -w 80% -E "tmux list-sessions | fzf"'
 
-        # Easy copy mode
         # bind Enter copy-mode
+        # Easy copy mode
         # bind -n M-Enter copy-mode
 
         # VIM -------------------------------------------------------------------------------------------------------
         # vim coloring
         set-option -ga terminal-overrides ",xterm-256color:Tc"
         # like vim split
-        bind h split-window -v
-        bind v split-window -h
+        bind h split-window -v -c "#{pane_current_path}"
+        bind v split-window -h -c "#{pane_current_path}"
         # Copy mode  ------------------------------------------------------------------------------------------------
         setw -g mode-keys vi
         bind -T copy-mode-vi v send -X begin-selection
@@ -100,11 +98,14 @@ in
         set-option -s set-clipboard off
         bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -selection clipboard -i"
 
-        # set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 
         set -g @plugin 'tmux-plugins/tmux-yank'
 
-        # set -g @plugin 'ofirgall/tmux-window-name'
+        set -g @plugin 'ofirgall/tmux-window-name'
+        set -g set-clipboard on
+        set -g @override_copy_command 'xclip -i -selection clipboard'
+        set -g @yank_selection 'clipboard'
+        set -as terminal-features ',*:clipboard'
 
         # Persist Sessions -------------------------------
         set -g @plugin 'tmux-plugins/tmux-resurrect'
@@ -121,14 +122,46 @@ in
         set-option -g status-justify centre
         set -g @plugin 'dracula/tmux'
         # https://draculatheme.com/tmux
-        set -g @dracula-plugins "cpu-usage ram-usage git"
-        # set -g @dracula-show-powerline true
+        set -g @dracula-plugins "git cpu-usage ram-usage battery time"
+        set -g @dracula-show-powerline false
         set -g @dracula-show-flags true
-        set -g @dracula-refresh-rate 3
         set -g @dracula-show-left-icon session
-        set -g @dracula-border-contrast false
+        set -g @dracula-border-contrast true 
         set -g @dracula-show-empty-plugins false
-        # ------------------------------------------------
+
+        # color theme ------------------------------------
+        set -g @dracula-colors "
+        # simple catppuccin Color Pallette
+        pink='#cba6f7'
+        orange='#fab387'
+        yellow='#f9e2af'
+        green='#a6e3a1'
+        cyan='#89dceb'
+        light_purple='#b4befe'
+        white='#cdd6f4'
+        dark_gray='#313244'
+        red='#f38ba8'
+        gray='#45475a'
+        dark_purple='#6c7086'
+        "
+
+        # git --------------------------------------------
+        set -g @dracula-git-show-current-symbol ✓
+        set -g @dracula-git-show-diff-symbol !
+        set -g @dracula-git-show-remote-status true
+
+        # time -------------------------------------------
+        set -g @dracula-military-time true
+        set -g @dracula-day-month true
+        set -g @dracula-show-timezone false
+
+        # network ----------------------------------------
+        set -g @dracula-network-wifi-label " "
+        set -g @dracula-network-ethernet-label "󰈀 "
+
+        # battery ----------------------------------------
+        set -g @dracula-battery-label false
+        set -g @dracula-show-battery-status true
 
 
         set -g @plugin 'christoomey/vim-tmux-navigator'
