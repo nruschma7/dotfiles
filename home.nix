@@ -6,6 +6,7 @@
     ./modules/dotnet.nix
     ./modules/python.nix
     ./modules/tmux.nix
+    ./modules/starship.nix
     ./modules/neovim.nix
   ];
 
