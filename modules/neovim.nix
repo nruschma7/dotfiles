@@ -9,15 +9,15 @@
 
     extraPackages = with pkgs; [
       git
-      gcc                # C-Compiler für nvim-treesitter
+      gcc
       gnumake
-      tree-sitter        # tree-sitter CLI (nvim-treesitter)
+      tree-sitter
       curl
 
-      ripgrep            # Live-Grep (Snacks/Telescope)
-      fd                 # Dateisuche
-      fzf                # fzf-lua Extra
-      lazygit            # <leader>gg
+      ripgrep
+      fd
+      fzf
+      lazygit
 
       unzip
       gzip
@@ -32,17 +32,17 @@
       imagemagick
       ghostscript
       tectonic
-    ] ++ lib.optionals pkgs.stdenv.isLinux [
-      mermaid-cli        # Mermaid-Diagramme (snacks.image)
-      wl-clipboard       # Clipboard unter Wayland
-      xclip              # Clipboard unter X11
+    ] ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux  [
+      mermaid-cli
+      wl-clipboard
+      xclip
     ];
   };
 
   home.packages = [
     pkgs.nerd-fonts.jetbrains-mono
   ];
-  fonts.fontconfig.enable = pkgs.stdenv.isLinux;
+  fonts.fontconfig.enable = pkgs.stdenv.hostPlatform.isLinux ;
 
   xdg.configFile."nvim/init.lua".enable = lib.mkForce false;
 
