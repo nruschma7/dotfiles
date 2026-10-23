@@ -7,6 +7,7 @@
     ./modules/python.nix
     ./modules/tmux.nix
     ./modules/starship.nix
+    ./modules/text-slides.nix
     ./modules/neovim.nix
   ];
 
