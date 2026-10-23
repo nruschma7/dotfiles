@@ -22,6 +22,9 @@ let
   '';
 in
 {
+  # awk is needed by tpm and its plugins
+  home.packages = [ pkgs.gawk ];
+
   programs.tmux = {
     enable = true;
     terminal = "tmux-256color";
@@ -49,7 +52,7 @@ in
 
     if [ -x "$tpm_dir/bin/install_plugins" ]; then
       (
-        export PATH="${lib.makeBinPath [ pkgs.git pkgs.tmux ]}:$PATH"
+        export PATH="${lib.makeBinPath [ pkgs.git pkgs.tmux pkgs.gawk ]}:$PATH"
         run "$tpm_dir/bin/install_plugins"
       ) || echo "tpm: Plugin-Installation fehlgeschlagen"
     fi
