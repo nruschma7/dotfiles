@@ -19,7 +19,7 @@ in
   home.packages = with pkgs; [
     stack
     pandoc        # text-slides calls pandoc at runtime
-    mermaid-cli   # needed for ~~~mermaid blocks
+    pdftk
   ];
 
   # `stack install` puts the binary into ~/.local/bin

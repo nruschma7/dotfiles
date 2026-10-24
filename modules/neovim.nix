@@ -33,7 +33,6 @@
       ghostscript
       tectonic
     ] ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux  [
-      mermaid-cli
       wl-clipboard
       xclip
     ];

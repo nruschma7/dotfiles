@@ -9,6 +9,7 @@
     ./modules/starship.nix
     ./modules/texlive.nix
     ./modules/text-slides.nix
+    ./modules/mermaidjs.nix
     ./modules/neovim.nix
   ];
 
